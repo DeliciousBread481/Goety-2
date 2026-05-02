@@ -125,8 +125,8 @@ public class SkullLord extends Monster implements ICustomAttributes {
     }
 
     public BlockEntity getPithos(){
-        if (this.getBoundOrigin() != null){
-            return this.level.getBlockEntity(this.getBoundOrigin());
+        if (this.getBoundOrigin() != null && this.level.isLoaded(this.getBoundOrigin())){
+            return this.level.getBlockEntity(this.getBoundOrigin());  
         }
         return null;
     }
