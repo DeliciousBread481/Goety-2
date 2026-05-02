@@ -1,0 +1,29 @@
+{
+  "name": "不洁长袍",
+  "icon": "goety:unholy_robe",
+  "category": "goety:crafts/garment",
+  "advancement": "goety:goety/kill_a_apostle",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "使用那些黑暗使者的$(l)至纯之血$()，$(l)这种血液只能从下界杀死他们才能获得$()，你已经复制了他们的服装。长袍赋予你对火和灼烧魔印的免疫，并且与不洁圣冠搭配时可以准许你使用狱界之焰。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:unholy_fabric"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:unholy_robe"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety:unholy_hat"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:unholy_fabric": 1,
+    "goety:unholy_robe": 2,
+    "goety:unholy_hat": 3
+  }
+}

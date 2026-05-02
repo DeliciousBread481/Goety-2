@@ -1,0 +1,16 @@
+{
+  "name": "Trompa de Comando",
+  "icon": "goety:command_horn",
+  "category": "goety:crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Muda o modo de movimento dos servos (16 blocos) entre 'Esperar' e 'Seguir'. Clique em um bloco para movê-los até ele."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety:command_horn",
+      "text": "Não afeta servos em Modo de Guarda ou vinculados a um $(l:crafts/grimoire_of_grounding)Grimório de Grounding$()."
+    }
+  ]
+}

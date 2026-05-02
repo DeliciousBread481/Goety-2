@@ -1,0 +1,18 @@
+{
+  "name": "忌まわしい機械",
+  "icon": "minecraft:end_stone",
+  "category": "goety:rumors",
+  "advancement": "goety:goety/read_warred_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "戦争の巻物​​には、レッドストーン ゴーレムよりも強力な変種が作られ、失われた土地に追放されたという記述があります。また、この獣が破壊される前にどのように作られたかを記録した学者もいますが、確かにまだ残っているものがあるでしょう..."
+    },
+    {
+      "type": "patchouli:quest",
+      "trigger": "goety:goety/get_shrouded_blueprint",
+      "text": "巻物には、獣のデザインは「$(l)エンド$()」の存在から来た可能性があると書かれており、おそらくそこに秘密が隠されているのかもしれない。"
+    }
+  ]
+}
