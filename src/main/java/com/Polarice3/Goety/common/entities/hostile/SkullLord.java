@@ -8,6 +8,7 @@ import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.projectiles.HauntedSkullProjectile;
+import com.Polarice3.Goety.common.events.TimedEvents;
 import com.Polarice3.Goety.common.magic.spells.ShockwaveSpell;
 import com.Polarice3.Goety.common.magic.spells.storm.ElectroOrbSpell;
 import com.Polarice3.Goety.common.network.ModServerBossInfo;
@@ -125,7 +126,7 @@ public class SkullLord extends Monster implements ICustomAttributes {
     }
 
     public BlockEntity getPithos(){
-        if (this.getBoundOrigin() != null){
+        if (this.getBoundOrigin() != null && this.level.isLoaded(this.getBoundOrigin())){
             return this.level.getBlockEntity(this.getBoundOrigin());
         }
         return null;
@@ -479,22 +480,35 @@ public class SkullLord extends Monster implements ICustomAttributes {
         }
     }
 
-    @Override
-    public void onRemovedFromWorld() {
-        super.onRemovedFromWorld();
-        if (!this.level.isClientSide) {
-            if (this.getBoneLord() != null){
-                this.getBoneLord().discard();
-            }
-            if (!this.isDespawn()) {
-                if (this.getPithos() != null) {
-                    if (this.getPithos() instanceof PithosBlockEntity pithosTile) {
-                        pithosTile.setSkullLordName(null);
-                        pithosTile.unlock();
-                    }
-                }
-            }
-        }
+    @Override  
+    public void onRemovedFromWorld() {  
+        super.onRemovedFromWorld();  
+        if (!this.level.isClientSide) {  
+            if (this.getBoneLord() != null){  
+                this.getBoneLord().discard();  
+            }  
+            if (!this.isDespawn()) {  
+                if (this.getPithos() != null) {  
+                    if (this.getPithos() instanceof PithosBlockEntity pithosTile) {  
+                        pithosTile.setSkullLordName(null);  
+                        BlockPos pithosPos = pithosTile.getBlockPos().immutable();  
+                        Level pithosLevel = pithosTile.getLevel();  
+                        TimedEvents.submitTask("pithos_unlock_" + pithosPos.toShortString(), new EventTask() {  
+                            @Override  
+                            public boolean getAsBoolean() {  
+                                if (pithosLevel != null) {  
+                                    BlockEntity be = pithosLevel.getBlockEntity(pithosPos);  
+                                    if (be instanceof PithosBlockEntity p) {  
+                                        p.unlock();  
+                                    }  
+                                }  
+                                return true;  
+                            }  
+                        });  
+                    }  
+                }  
+            }  
+        }  
     }
 
     public void makeStuckInBlock(BlockState pState, Vec3 pMotionMultiplier) {
